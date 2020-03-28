@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7">
+      <!-- FORM TO CREATE USERS -->
+      <form (ngSubmit)="submitForm()" #userForm="ngForm">
+        <div id="form-data">
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom01">First name</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="validationCustom01" 
+                   placeholder="First name"
+                   ngModel
+                   name="userFirstName" 
+                   required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Last name</label>
+            <input type="text" 
+                   class="form-control" 
+                   id="validationCustom02" 
+                   placeholder="Last name"
+                   ngModel
+                   name="userLastName" 
+                   required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12 mb-3">
+              <label for="validationCustomUsername">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupPrepend">@</span>
+                </div>
+                <input type="text" 
+                       class="form-control" 
+                       id="validationCustomUsername" 
+                       placeholder="Enter your email"
+                       aria-describedby="inputGroupPrepend"
+                       ngModel
+                       name="userEmail"
+                       email
+                       required
+                       #email="ngModel">
+                <span class="help-block" *ngIf="!email.valid && email.touched"
+                style="color: red">Please choose a valid username.</span>
+              </div>
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">UserIdz<small>(i.e EmployId)</small></label>
+                <input type="text" 
+                       class="form-control" 
+                       id="validationCustom01" 
+                       placeholder="userId" 
+                       ngModel
+                       name="userId"
+                       value="PT" 
+                       required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>DesigNation</label>
+                <select class="form-control" 
+                        [ngModel]="defaultDesignation"
+                        name="userDesignation">
+                  <option value="PROJECT TRAINEE">PROJECT TRAINEE</option>
+                  <option value="SOFTWARE ENGINNER">SOFTWARE ENGINNER</option>
+                  <option value="SCRUM MASTER">SCRUM MASTER</option>
+              </select>
+            </div>
+        </div>  
+      </div>
+      <div class="form-row">
+          <div class="col-md-6 mb-3">
+              <label>SELECT TEAM</label>
+              <select class="form-control" 
+                      [ngModel]="defaultTeam"
+                      name="userTeamName"
+                      >
+                <!-- <option value="NONE">NONE</option> -->
+                <option *ngFor="let tName of teams" [value]="tName.teamName">{{ tName.teamName }}</option>
+            </select>
+          </div>
+      </div>
+      <!-- <p *ngIf="!userData.valid && userData.touched">Invalid Data</p> -->
+        <button class="btn btn-primary" 
+                type="submit"
+                [disabled]="!userForm.valid">Submit form</button>
+                <h4 style="color : red" *ngIf="showStatus!=='USER CREATED'; else show">{{ showStatus }}</h4>
+                <ng-template #show>
+                  <h4 style="color : green">{{ showStatus }}</h4>
+                </ng-template>
+      </form>
+      
+      <div>
+          <p>&nbsp;</p>
+            <button class="btn btn-success" [routerLink]="['/teams']"> Go To Teams</button>&nbsp;
+            <!-- <button class="btn btn-success" [routerLink]="['/createUser']"> Create users</button>&nbsp; -->
+            <button class="btn btn-success" [routerLink]="['/scrums']"> Create Scrum</button>
+        </div>
+
+    </div>
+    <div class="col-sm-5">
+        <div class="list-group">
+    
+            <a class="list-group-item list-group-item-action flex-column align-items-start active">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">All Employees</h5>
+              </div>
+            </a>
+        
+            <div *ngFor="let user of users">
+            <a class="list-group-item list-group-item-action flex-column align-items-start" *ngIf="user.userDesignation!='MANAGER'">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ user.userFirstName }} {{ user.userLastName }}</h5>
+                <small class="text-muted"> EmpId : {{ user.userId }}</small>
+              </div>
+              <p class="mb-1">Email : {{ user.userEmail }}</p>
+              <small class="text-muted">DesignNation : {{ user.userDesignation }}</small><br>
+              <div class ="d-flex w-100 justify-content-between">
+                <small class="text-muted">Team Name : {{ user.userTeamName }}</small>
+                <span class="badge badge-pill badge-danger clickable" (click)="deleteCurrentUser(user)">Delete User</span>
+              </div>
+            </a>
+          </div>
+          </div>
+    </div>
+  </div>
+</div>

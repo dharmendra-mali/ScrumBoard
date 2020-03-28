@@ -1,0 +1,59 @@
+<div class="container">
+
+    <div class="row">
+      <div class="col-sm-7">
+        <form (ngSubmit)="getScrumName()" #scrumName="ngForm">
+          <div id="form-data">
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <label for="team">SCRUM NAME</label>
+                <input type="text"
+                       ngModel
+                       class="form-control"
+                       id="team"
+                       name="teamName"
+                       required>
+              </div>
+            </div>
+            <div class="form-row">
+                <button class="btn btn-primary" [disabled]='!scrumName.valid'>Create Scrum</button>
+                <div *ngIf="duplicate">
+                  <h4 style="color : red">OOPS! IT SEEMS SCRUM WITH SAME NAME ALREADY EXIST</h4>
+                </div>
+            </div>
+          </div>
+        </form>
+        <div>
+            <p>&nbsp;</p>
+              <button class="btn btn-success" [routerLink]="['/teams']"> Go To Teams</button>&nbsp;
+              <button class="btn btn-success" [routerLink]="['/createUser']"> Go To users</button>&nbsp;
+              <!-- <button class="btn btn-success" [routerLink]="['/scrums']"> Create Scrum</button> -->
+          </div>
+      </div>
+      <div class="col-sm-5">
+          <a class="list-group-item list-group-item-action flex-column align-items-start active">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">All Tasks</h5>
+              </div>
+            </a>
+  
+            <div *ngFor="let scrum of scrums">
+              
+                 <a  class="list-group-item bg-light">
+                  <div class="d-flex w-100">
+                    <h5 [routerLink]="['/scrums', scrum.scrumName ]"
+                        class="mb-1 clickable" 
+                        style="color: black">{{ scrum.scrumName }}</h5>
+                  </div>
+              
+                      <small>ASSIGNED TO : {{ scrum.team.teamName }} <br> </small>
+                   
+                   <span class="badge badge-danger clickable" 
+                          (click)="deleteScrum(scrum.scrumName)"
+                          style="float: right">Delete Scrum</span>
+                   <pre>  </pre>       
+                </a>
+          </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <div *ngIf="displayConent">
+                
+            <a class="list-group-item bg-secondary">
+                 <small class="list-group-item bg-dark clickable" 
+                        style="color: white"
+                        > 
+                        SCRUM NAME : {{ scrum.scrumName }} <span style="float: right;">ASSIGNED TO : {{ scrum.team.teamName }}</span>  <br> 
+                 </small>
+                 <div *ngFor="let story of tasks">
+                    <ul class="list-group">
+                      <li class="list-group-item"> {{ story.notes }} <span class="badge  badge-danger clickable" (click)="removeStory(story.notes, scrum.scrumName )">Remove</span></li> 
+                    </ul>  
+                 </div>
+                 <span class="badge badge-warning clickable"
+                     style="float: right"
+                     [routerLink]="['/scrums', scrum.scrumName]">Edit Scrum</span>
+              <span class="badge badge-danger clickable" 
+                     (click)="deleteScrum(scrum.scrumName)"
+                     style="float: right"
+                     [routerLink]="['/viewScrums']">Delete Scrum</span>
+              <pre>  </pre>       
+           </a>
+     </div>
+    </div>
+  </div>
+</div>

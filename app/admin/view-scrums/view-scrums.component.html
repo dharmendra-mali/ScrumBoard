@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+            <a class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">All Tasks</h5>
+                </div>
+              </a>
+    
+            <div *ngIf="isNotEmpty; else noElement">
+              <div *ngFor="let scrum of scrums;">
+                
+                   <a class="list-group-item bg-secondary">
+                        <small class="list-group-item bg-dark clickable" 
+                               style="color: white"
+                               [routerLink]="['/viewScrums', scrum.scrumName]"> 
+                                SCRUM NAME : {{ scrum.scrumName }} <span style="float: right;">ASSIGNED TO : {{ scrum.team.teamName }}</span>  <br> 
+                        </small>
+                        <!-- <div *ngFor="let story of scrum.notes">
+                           <ul class="list-group">
+                             <!-- <li class="list-group-item"> {{ story }} <span class="badge  badge-danger" (click)="removeStory(story)">Remove</span></li> 
+                           </ul>  
+                        </div> -->
+                     <span class="badge badge-danger clickable" 
+                            (click)="deleteScrum(scrum.scrumName)"
+                            style="float: right">Delete Scrum</span>
+                     <pre>  </pre>       
+                  </a>
+               </div>
+            </div>
+            <ng-template #noElement>
+              <h4 style="color: red; text-align: center;">PLEASE CREATE SOME SCRUM</h4>
+            </ng-template>
+    </div>
+    <div>
+        <p>&nbsp;</p>
+          <button class="btn btn-success" [routerLink]="['/admin']"> Go To Dash Board</button>&nbsp;
+          <!-- <button class="btn btn-success" [routerLink]="['/createUser']"> Go To users</button>&nbsp; -->
+          <!-- <button class="btn btn-success" [routerLink]="['/scrums']"> Create Scrum</button> -->
+      </div>
+  </div>
+</div>

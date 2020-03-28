@@ -1,0 +1,104 @@
+
+<div class="container">
+  <div class="row">
+      <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+          <h1 class="display-4">Welcome {{ currentUser.userFirstName }}</h1>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1">
+
+    </div>
+    <div class="col-sm-10">
+        <ul class="list-group" >
+            <li class="list-group-item bg-danger" style="color:white; text-align: center">THINGS TO DO</li>
+            <small *ngIf="currentUser.userTeamName!=='NONE'; else nothing">
+            <li class="list-group-item" *ngFor="let story of userStoryFromScrum">
+              
+               {{ story.notes }} 
+              <small class="badge bg-primary clickable" 
+                     style="float: right;" 
+                     (click)="addToUser(story.notes)"
+                     *ngIf="story.taskStatus==='NONE' ; else acquired">Open</small>
+                <ng-template #acquired>
+                  <small style="float: right">ACQUIRED BY : [{{ story.taskStatus }}]</small>
+                </ng-template> 
+              
+            </li>
+          </small>
+          <ng-template #nothing>
+            <h2 style="color: green; text-align: center;">You are all caught up</h2>
+          </ng-template>
+          </ul>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+        <div class="list-group">
+            <ul class="list-group" >
+                <li class="list-group-item bg-primary" style="color:white; text-align: center">TO DO LIST</li>
+               
+              </ul>
+
+                    <div *ngFor="let toDo of toDoList;let i = index">
+                      <div *ngFor="let helper of toDo.toDoHelper">
+                          <em *ngIf="helper.status==='TO DO' && toDo.userId === userId">
+                           {{ helper.story }}
+                            
+                    
+                              <small class="badge bg-danger clickable" (click)="addToProgress('remove',helper.story)" style="float: right">remove</small>
+                              <small class="badge bg-secondary clickable" (click)="addToProgress('start', helper.story)" style="float: right">start</small>
+                             </em>
+                      </div>
+                    </div>
+               
+          </div> 
+    </div>
+    <div class="col-sm-4">
+        <ul class="list-group" >
+            <li class="list-group-item bg-warning" style="color:white; text-align: center">PROGRESS</li>
+          </ul>
+          <div *ngFor="let toDo of toDoList">
+              <div *ngFor="let helper of toDo.toDoHelper">
+                  <em *ngIf="helper.status==='PROGRESS' && toDo.userId === userId">
+                    {{ helper.story }}
+                    
+            
+                      <small class="badge bg-danger clickable" (click)="addToProgress('remove',helper.story)" style="float: right">remove</small>
+                      <small class="badge bg-success clickable" (click)="addToDone('start', helper.story)" style="float: right">done</small> </em>
+              </div>
+            </div>
+          <!-- <ul class="list-group-item"  *ngFor="let toDo of toDoList">
+              <li class="list-group-item" ngFor="let state of toDo.status; let i = index">
+                <em *ngIf="state==='TO DO'">{{ toDo.story[i] }}
+                    <small class="badge bg-danger clickable" (click)="addToProgress('remove',toDo.story[i])" style="float: right">remove</small>
+                <small class="badge bg-success clickable" (click)="addToDone('done', toDo.story[i])" style="float: right">done</small> </em>
+              </li>
+            </ul>  -->
+    </div>
+    <div class="col-sm-4">
+        <div class="list-group">
+            <ul class="list-group" >
+                <li class="list-group-item bg-success" style="color:white; text-align: center">DONE</li>
+              </ul>
+              <!-- <ul class="list-group"  *ngFor="let toDo of toDoList">
+                  <li class="list-group-item" *ngFor="let story of toDo.story">
+                    <em *ngIf="toDo.status==='DONE'">{{ story }}
+                    <small class="badge bg-success clickable" (click)="addToDone('done', story)" style="float: right">done</small> </em>
+                  </li>
+                </ul> -->
+                <div *ngFor="let toDo of toDoList">
+                    <div *ngFor="let helper of toDo.toDoHelper">
+                        <em *ngIf="helper.status==='DONE' && toDo.userId === userId">
+                          {{ helper.story }}
+                          
+                  
+                            <!-- <small class="badge bg-danger clickable" (click)="addToProgress('remove',toDo.story[i])" style="float: right">remove</small> -->
+                            <small class="badge bg-secondary" style="float: right">Completed</small> </em>
+                    </div>
+                  </div>
+          </div>
+    </div>
+  </div>
+</div>

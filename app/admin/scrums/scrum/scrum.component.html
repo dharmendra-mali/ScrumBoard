@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" style="text-align: center">
+        <ul class="list-group">
+            <li class="list-group-item bg-info"><h4>Create Task</h4></li>
+        </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8">
+      <ul class="list-group">
+          <li class="list-group-item active bg-secondary"><h4>Create Task</h4></li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+        <ul class="list-group">
+            <li class="list-group-item active bg-secondary"><h4>Select Team</h4></li>
+        </ul>
+    </div>
+  </div>
+  <div class="row">
+     <div class="col-sm-8">
+        <ul class="list-group" *ngFor="let story of tasks">
+          <li class="list-group-item ">  {{ story }} <span  class=" badge badge-danger clickable" style="float: right;" (click)="removeTask(story)">Remove</span></li>
+        </ul>
+    </div>
+    <div class="col-sm-4">
+      <select #teamName class="form-control">
+        <option *ngFor="let team of teams" [value]="team.teamName">{{ team.teamName }}</option>
+      </select>
+      <button class="btn btn-primary" (click)="assignTeam()" >Assign</button>
+    </div>
+  </div>
+    <div class="col-sm-8">
+      <form (ngSubmit)="addStory()" #task="ngForm">
+        <input type="text" 
+               class="form-control"
+               style="background-color: antiquewhite" 
+               ngModel
+               name="taskName"
+               required>
+        <button class="btn btn-primary" [disabled]="!task.valid">Add Story</button>
+      </form>
+      <!-- <div>
+          <p>&nbsp;</p>
+            <button class="btn btn-success" [routerLink]="['/teams']"> Go To Teams</button>&nbsp;
+            <button class="btn btn-success" [routerLink]="['/createUser']"> Go To users</button>&nbsp;
+            <button class="btn btn-success" [routerLink]="['/scrums']"> Create Scrum</button>
+        </div> -->
+    </div>
+</div>
+
+

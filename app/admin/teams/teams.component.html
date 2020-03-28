@@ -1,0 +1,66 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7">
+        <form (ngSubmit)="submitTeamName()" #teamName="ngForm">
+            <div id="form-data">
+              <div class="form-row">
+                <div class="col-md-12 mb-3">
+                  <label for="team">Team Name</label>
+                  <input type="text"
+                         ngModel
+                         class="form-control"
+                         id="team"
+                         name="teamName"
+                         required
+                         >
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-12">
+                  <button class="btn btn-primary" [disabled]="!teamName.valid">Create Team</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div style="color: green" *ngIf="duplicateTeam==='Team Created'; else another"><h4>{{ duplicateTeam }}</h4>
+          </div>
+          <ng-template #another><h4 style="color: red">{{ duplicateTeam }}</h4></ng-template>
+          <div>
+            <p>&nbsp;</p>
+              <!-- <button class="btn btn-success" [routerLink]="['/teams']"> Go To Teams</button>&nbsp; -->
+              <button class="btn btn-success" [routerLink]="['/createUser']"> Create users</button>&nbsp;
+              <button class="btn btn-success" [routerLink]="['/scrums']"> Create Scrum</button>
+          </div>
+    </div>
+    <div class="col-sm-5">
+        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">All Teams</h5>
+            </div>
+          </a>
+
+          <div *ngFor="let team of teams">
+            
+              <a *ngIf="team.teamName!=='NONE'" class="list-group-item bg-light">
+                <div class="d-flex w-100">
+                  <h5 [routerLink]="['/teams',team.teamName]" class="mb-1 clickable" style="color: black">{{ team.teamName }}</h5>
+                </div>
+                <div>
+                    <small *ngFor="let user of team.teamUsers">
+                      <div *ngIf="user.userTeamName==='NONE'; else showUser"></div>
+                      <ng-template #showUser>
+                      <div class="list-group-item" style="color : green">{{team.teamName}}{{ user.userId }} -{{ user.userFirstName }} {{ user.userLastName }} </div> 
+                    </ng-template>
+                  </small>
+                 </div> 
+                 
+                 <span class="badge badge-danger clickable" 
+                        (click)="deleteTeam(team.teamName)"
+                        style="float: right">Delete Team</span>
+                 <pre>  </pre>       
+              </a>
+        </div>
+    </div>
+  </div>
+</div>

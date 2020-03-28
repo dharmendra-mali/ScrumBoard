@@ -1,0 +1,45 @@
+<div class="back" id="fixedContainer">
+<!-- <div class="container"> -->
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" (ngSubmit)="login()" #loginData="ngForm">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" 
+                   id="email" 
+                   class="form-control" 
+                   placeholder="Email address"
+                   name="email"                   
+                   email
+                   ngModel
+                   required 
+                   autofocus
+                   #email="ngModel"
+                   >
+                   <span class="help-block" *ngIf="!email.valid && email.touched"
+                style="color: red">Please enter a valid username.</span>
+            <input type="password" 
+                   id="inputPassword" 
+                   class="form-control" 
+                   placeholder="Password"
+                   name="password" 
+                   required
+                   ngModel>
+            <!-- <div id="remember" class="checkbox"> -->
+                <!-- <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label> -->
+            <!-- </div> -->
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+        </form>
+        <span style="color:red">{{ showMessage }}</span>
+        <!-- <a href="#" class="forgot-password">
+            Forgot the password?
+        </a> -->
+        <a [routerLink]="['/createUser']">
+          Sign up
+      </a>
+    </div>
+   
+<!-- </div> -->
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Select Members for Team : {{ teamName }}</h5>
+            </div>
+          </a>
+
+          <div *ngFor="let user of users">
+            <div *ngIf="user.userTeamName==='NONE'">
+              <a  class="list-group-item list-group-item-action flex-column align-items-start" *ngIf="user.userDesignation!=='MANAGER'">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{ user.userFirstName }} {{ user.userLastName }}</h5>
+                  <small class="text-muted"> EmpId : {{ user.userId }}</small>
+                </div>
+                <p class="mb-1">Email : {{ user.userEmail }}</p>
+                <small class="text-muted">DesignNation : {{ user.userDesignation }}</small>
+                <small class="text-muted">Team Name : {{ user.userTeamName }}</small>
+                <button class ="btn btn-primary" style="float: right;" (click)="addToTeam(user)">Add user</button>
+              </a>
+            </div>
+        </div>
+        <hr>
+        <h3>SELECTED USERS</h3>
+        <hr>
+        <div *ngFor="let user of users">
+            <div *ngIf="user.userTeamName===teamName">
+              <a  class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{ user.userFirstName }} {{ user.userLastName }}</h5>
+                  <small class="text-muted"> EmpId : {{ user.userId }}</small>
+                </div>
+                <p class="mb-1">Email : {{ user.userEmail }}</p>
+                <small class="text-muted">DesignNation : {{ user.userDesignation }}</small>
+                <small class="text-muted">Team Name : {{ user.userTeamName }}</small>
+                <button class ="btn btn-danger" style="float: right;" (click)="reamovFromTeam(user)">Remove user</button>
+              </a>
+            </div>
+        </div>
+        <button class="btn btn-success" [routerLink]="['/teams']"> Go To Teams</button>&nbsp;
+        <button class="btn btn-success" [routerLink]="['/createUser']"> Create users</button>&nbsp;
+        <button class="btn btn-success" [routerLink]="['/scrums']"> Create Scrum</button>
+    </div>
+  </div>
+</div>

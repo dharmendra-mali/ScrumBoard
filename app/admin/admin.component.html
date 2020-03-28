@@ -1,0 +1,86 @@
+
+
+<body>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Scrum Master</h1>
+    <h5>You ask for it and, it will do it for you!</h5>
+  </div>
+</div>
+<br>
+
+<div class="container-fluid" >   
+  <div class="row">
+        <!-- <div class="container1"> -->
+            <div class="col-sm-1">&nbsp;</div>
+            <div class="col-sm-2 row1 def">
+                <div class="card" style="width: 18rem ;">
+                    <img [routerLink]="['/createUser']" class="card-img-top clickable image" src="http://www.keepitusable.com/blog/wp-content/uploads/2013/03/know-your-users.jpg"  style="height: 160px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Manage Users</h5>
+                      
+                      <p class="card-text" style="height : 100px">If you have new employees for the project or some leaving the project, you can handle it here.   </p>
+                      <!-- <a [routerLink]="['/createUser']" class="btn btn-primary">Go somewhere</a> -->
+                      
+                    </div>
+                  <div class="overlay clickable" [routerLink]="['/createUser']">
+              <div class="text">Manage Users</div>
+            </div>
+          </div>
+        </div> 
+        <!-- <div class="col-sm-1">&nbsp;</div>  -->
+      <!-- </div> -->
+      <!-- <div class="container1"> -->
+    <div class="col-sm-2 row1 def">  
+        <div class="card" style="width: 18rem; ">
+            <img [routerLink]="['/teams']" class="card-img-top clickable image" src="http://www.painetopain.com/wp-content/uploads/2013/04/TeamEvent.jpg" alt="Card image cap" style="height: 160px;">
+            <div class="card-body">
+              <h5 class="card-title">Manage Teams</h5>
+              <p class="card-text" style="height : 84px">If you want to create a new team for a new project or for existing project or edit the existing team.</p>
+              <!-- <br> -->
+              <!-- <a [routerLink]="['/teams']" class="btn btn-primary">Go somewhere</a> -->
+              <div class="overlay clickable" [routerLink]="['/teams']">
+                  <div class="text">Manage Teams</div>
+                </div>
+            </div>
+          </div>
+    </div>
+  <!-- </div> -->
+  <!-- </div> -->
+  <!-- <div class="col-sm-1">&nbsp;</div> -->
+
+      <!-- <div class="container1"> -->
+    <div class="col-sm-2 row1">
+        <div class="card" style="width: 18rem;">
+            <img [routerLink]="['/scrums']" class="card-img-top clickable" src="https://as1.ftcdn.net/jpg/00/73/62/50/1000_F_73625072_Ve7O4v4SKAZrKJNLbgU39AwRXxkUtZKF.jpg" style="height: 160px;" >
+            <div class="card-body">
+              <h5 class="card-title">Create Scrum</h5>
+              <p class="card-text" style="height : 84px">Sprint creation for all kinds of projects is done!</p>
+              <!-- <a [routerLink]="['/scrums']" class="btn btn-primary">Go somewhere</a> -->
+              <div class="overlay clickable" [routerLink]="['/scrums']">
+                  <div class="text" >Create Scrum</div>
+                </div>
+            </div>
+          </div>
+    </div>
+  <!-- </div> -->
+  <!-- <div class="col-sm-1">&nbsp;</div> -->
+    <!-- <div class="container1"> -->
+    <div class="col-sm-2 row1">
+        <div class="card" style="width: 18rem;">
+            <img [routerLink]="['/viewScrums']" class="card-img-top clickable" src="https://www.xendo.com/images/scrum.png" >
+            <div class="card-body">
+              <h5 class="card-title">View Scrum</h5>
+              <p class="card-text" style="height : 91px">All the scrums can be viewed here. Basically for the scrum Master.</p>
+              <!-- <a [routerLink]="['/viewScrums']" class="btn btn-primary">Go somewhere</a> -->
+              <div class="overlay clickable"  [routerLink]="['/viewScrums']">
+                  <div class="text ">View Scrum</div>
+                </div>
+            </div>
+          </div>
+    </div>
+    </div>
+  <!-- </div> -->
+  </div>
+  
+</body>
